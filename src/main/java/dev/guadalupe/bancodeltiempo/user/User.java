@@ -1,12 +1,6 @@
-package dev.guadalupe.bancodeltiempo.user;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "users")
@@ -17,28 +11,31 @@ import lombok.ToString;
 @ToString
 public class User {
 
-    // Atributos con anotaciones de JPA y validación
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @NotNull
-    @Size(min = 2, max = 50) // Validación para el nombre
+    @Size(min = 2, max = 50)
     private String name;
 
     @NotNull
-    @Email // Validación de formato de correo electrónico
+    @Email
+    @Pattern(
+        regexp = "^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$",
+        message = "Invalid email format"
+    )
     private String email;
 
     @NotNull
-    @Size(min = 8, max = 16) // Validación para la longitud de la contraseña
+    @Size(min = 8, max = 16)
     private String password;
 
     @NotNull
-    @Pattern(regexp = "\\+?[0-9]{10,15}") // Validación de formato de número telefónico
+    @Pattern(regexp = "\\+?[0-9]{10,15}", message = "Invalid phone number format")
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER) // Relación con Role (Muchos usuarios pueden tener el mismo rol)
-    @JoinColumn(name = "role_id", nullable = false) // Columna que mapea la relación en la base de datos
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 }
