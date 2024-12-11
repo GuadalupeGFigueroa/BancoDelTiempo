@@ -150,34 +150,14 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Tests para la relación con Role ---
     @Test
-    public void testValidRole() {
-        User user = createValidUser();
-        user.setRole(new Role(1, "Administrator"));
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
-
-        assertTrue(violations.isEmpty());
-    }
-
-    @Test
-    public void testInvalidRole_Null() {
-        User user = createValidUser();
-        user.setRole(null);
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
-
-        assertEquals(1, violations.size());
-        assertEquals("must not be null", violations.iterator().next().getMessage());
-    }
-
-    // --- Método auxiliar para crear un usuario válido ---
+      // --- Método auxiliar para crear un usuario válido ---
     private User createValidUser() {
         User user = new User();
         user.setName("John Doe");
         user.setEmail("example@example.com");
         user.setPassword("SecurePass123");
         user.setPhoneNumber("+12345678901");
-        user.setRole(new Role(1, "Administrator"));
         return user;
     }
 }

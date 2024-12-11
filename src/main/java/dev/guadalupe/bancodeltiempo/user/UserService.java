@@ -1,84 +1,48 @@
-package dev.guadalupe.bancodeltiempo.project.service;
+package dev.guadalupe.bancodeltiempo.user;
 
-import dev.guadalupe.bancodeltiempo.project.dto.UserDTO;
-import dev.guadalupe.bancodeltiempo.project.model.User;
-import dev.guadalupe.bancodeltiempo.project.repository.UserRepository;
+import dev.guadalupe.bancodeltiempo.user.User;
+import dev.guadalupe.bancodeltiempo.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
-
-    // 1. Listar todos los usuarios
-    public List<UserDto> listUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                    .map(this::convertToDto)
-                    .collect(Collectors.toList());
-    }
-    
-
-    // 2. Obtener usuario por ID
-    public UserDTO getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.map(this::convertToDTO)
-                   .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    // 3. Crear usuario
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
-        User savedUser = userRepository.save(user);
-        return convertToDTO(savedUser);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    // 4. Actualizar usuario
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
-        Optional<User> existingUser = userRepository.findById(id);
-        if (existingUser.isPresent()) {
-            User userToUpdate = existingUser.get();
-            userToUpdate.setName(userDTO.getName());
-            userToUpdate.setEmail(userDTO.getEmail());
-            userToUpdate.setPhoneNumber(userDTO.getPhoneNumber());
-            userToUpdate.setRole(userDTO.getRole());
-            User updatedUser = userRepository.save(userToUpdate);
-            return convertToDTO(updatedUser);
-        } else {
-            throw new RuntimeException("User not found with id: " + id);
-        }
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
-    // 5. Eliminar usuario
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id)
+                .map(existingUser -> {
+                    existingUser.setName(updatedUser.getName());
+                    existingUser.setLastname(updatedUser.getLastname());
+                    existingUser.setEmail(updatedUser.getEmail());
+                    existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+                    existingUser.setPassword(updatedUser.getPassword());
+                    return userRepository.save(existingUser);
+                }).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+
     public void deleteUser(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("User not found with id: " + id);
-        }
-    }
-
-    // Conversión de Entity a DTO
-    private UserDto convertToDto(User user) {
-        return new UserDto(
-            user.getId(),
-            user.getName(),
-            user.getEmail(),
-            null, // Excluir contraseña en la respuesta
-            user.getPhoneNumber(),
-            user.getRole()
-        );
-    }
-    
-
-    // Conversión de DTO a Entity
-    private User convertToEntity(UserDTO userDTO) {
-        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getPhoneNumber(), userDTO.getRole());
+        userRepository.deleteById(id);
     }
 }

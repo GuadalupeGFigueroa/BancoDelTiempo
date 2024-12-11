@@ -28,8 +28,8 @@ class UserControllerTest {
     @Test
     void listUsers_ReturnsUserList() throws Exception {
         // Mockear datos
-        User user1 = new User(1L, "John Doe", "john@example.com", "password123", "1234567890", Role.USER);
-        User user2 = new User(2L, "Jane Doe", "jane@example.com", "password456", "9876543210", Role.ADMIN);
+        User user1 = new User(1L, "John Doe", "john@example.com", "password123", "1234567890");
+        User user2 = new User(2L, "Jane Doe", "jane@example.com", "password456", "9876543210");
 
         when(userService.listUsers()).thenReturn(Arrays.asList(user1, user2));
 

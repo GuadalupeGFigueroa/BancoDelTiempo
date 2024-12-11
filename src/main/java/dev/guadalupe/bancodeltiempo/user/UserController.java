@@ -1,63 +1,50 @@
 package dev.guadalupe.bancodeltiempo.user;
-import dev.guadalupe.bancodeltiempo.user.User;
 
-
-import dev.guadalupe.bancodeltiempo.user.UserService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users") // Base del recurso
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // Registro de un usuario (acceso restringido para administradores)
-    @PostMapping("/admin/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-    }
-
-    // Listar todos los usuarios. Cribamos UserDto para que no devuelva la contraseña
     @GetMapping
-    public ResponseEntity<List<UserDto>> listUsers() {
-        List<UserDto> userDtos = userService.listUsers();
-        return ResponseEntity.ok(userDtos);
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
-    
 
-    // Actualizar un usuario (acceso restringido para administradores)
-    @PutMapping("/admin/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
-        Optional<User> userOptional = userService.getUserById(userId);
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
-        if (userOptional.isPresent()) {
-            User updatedUser = userService.updateUser(userId, userDetails);
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        try {
+            return ResponseEntity.ok(userService.updateUser(id, updatedUser));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 
-    // Eliminar un usuario (acceso restringido para administradores)
-    @DeleteMapping("/admin/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-        Optional<User> userOptional = userService.getUserById(userId);
-
-        if (userOptional.isPresent()) {
-            userService.deleteUser(userId);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 }
