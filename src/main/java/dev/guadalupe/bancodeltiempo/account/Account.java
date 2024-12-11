@@ -1,5 +1,7 @@
 package dev.guadalupe.bancodeltiempo.account;
 
+import org.hibernate.mapping.List;
+
 public class Account {
     private long id;
     private String owner; //Relacion con User
