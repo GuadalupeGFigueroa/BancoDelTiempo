@@ -26,12 +26,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    // Listar todos los usuarios
+    // Listar todos los usuarios. Cribamos UserDto para que no devuelva la contraseña
     @GetMapping
-    public ResponseEntity<List<User>> listUsers() {
-        List<User> users = userService.listUsers();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDto>> listUsers() {
+        List<UserDto> userDtos = userService.listUsers();
+        return ResponseEntity.ok(userDtos);
     }
+    
 
     // Actualizar un usuario (acceso restringido para administradores)
     @PutMapping("/admin/{userId}")
