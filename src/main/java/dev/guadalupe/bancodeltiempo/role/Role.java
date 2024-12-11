@@ -1,10 +1,29 @@
-package dev.guadalupe.bancodeltiempo.user;
+package dev.guadalupe.bancodeltiempo.role;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "roles") // Nombre de la tabla en la base de datos
 public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID autogenerado
     private Long id;
+
+    @Column(unique = true, nullable = false) // El nombre del rol debe ser único
     private String name;
 
-    // Getters, setters y constructor
+    // Constructor vacío requerido por JPA
+    public Role() {
+    }
+
+    // Constructor con parámetros
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // Getters y Setters
     public Long getId() {
         return id;
     }
