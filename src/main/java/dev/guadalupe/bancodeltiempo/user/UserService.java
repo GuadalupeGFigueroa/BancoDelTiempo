@@ -17,11 +17,13 @@ public class UserService {
     private UserRepository userRepository;
 
     // 1. Listar todos los usuarios
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public List<UserDto> listUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                    .map(this::convertToDto)
+                    .collect(Collectors.toList());
     }
+    
 
     // 2. Obtener usuario por ID
     public UserDTO getUserById(Long id) {
@@ -63,9 +65,17 @@ public class UserService {
     }
 
     // Conversión de Entity a DTO
-    private UserDTO convertToDTO(User user) {
-        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getRole());
+    private UserDto convertToDto(User user) {
+        return new UserDto(
+            user.getId(),
+            user.getName(),
+            user.getEmail(),
+            null, // Excluir contraseña en la respuesta
+            user.getPhoneNumber(),
+            user.getRole()
+        );
     }
+    
 
     // Conversión de DTO a Entity
     private User convertToEntity(UserDTO userDTO) {
