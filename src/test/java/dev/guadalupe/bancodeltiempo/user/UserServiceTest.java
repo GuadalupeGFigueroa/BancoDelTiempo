@@ -28,8 +28,8 @@ class UserServiceTest {
     @Test
     void getAllUsers_ReturnsListOfUsers() {
         // Mockear datos
-        User user1 = new User(1L, "John Doe", "john@example.com", "password123", "1234567890", Role.USER);
-        User user2 = new User(2L, "Jane Doe", "jane@example.com", "password456", "9876543210", Role.ADMIN);
+        User user1 = new User(1L, "John Doe", "john@example.com", "password123", "1234567890");
+        User user2 = new User(2L, "Jane Doe", "jane@example.com", "password456", "9876543210");
 
         when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
 
@@ -44,7 +44,7 @@ class UserServiceTest {
     @Test
     void getUserById_ReturnsUser_WhenUserExists() {
         // Mockear datos
-        User user = new User(1L, "John Doe", "john@example.com", "password123", "1234567890", Role.USER);
+        User user = new User(1L, "John Doe", "john@example.com", "password123", "1234567890");
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
@@ -60,8 +60,8 @@ class UserServiceTest {
     @Test
     void createUser_SavesUserCorrectly() {
         // Mockear datos
-        User user = new User(null, "John Doe", "john@example.com", "password123", "1234567890", Role.USER);
-        User savedUser = new User(1L, "John Doe", "john@example.com", "password123", "1234567890", Role.USER);
+        User user = new User(null, "John Doe", "john@example.com", "password123", "1234567890");
+        User savedUser = new User(1L, "John Doe", "john@example.com", "password123", "1234567890");
 
         when(userRepository.save(user)).thenReturn(savedUser);
 

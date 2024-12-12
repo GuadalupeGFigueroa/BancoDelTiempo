@@ -2,21 +2,22 @@ package dev.guadalupe.bancodeltiempo.user;
 
 import dev.guadalupe.bancodeltiempo.user.User;
 
+@SuppressWarnings("unused")
 public class UserDto {
     private Long id;
     private String name;
+    private String lastname;  // Incluyendo apellido para consistencia
     private String email;
-    private String password;
     private String phoneNumber;
-    private Role role;
+    private int balance;
 
     public UserDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
+        this.lastname = user.getLastname();  // Incluyendo apellido
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.phoneNumber = user.getPhoneNumber();
-        this.role = user.getRole();
+        this.balance = user.getBalance();
     }
 
     public UserDto() {
@@ -38,20 +39,20 @@ public class UserDto {
         this.name = name;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -62,13 +63,11 @@ public class UserDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public Role getRole() {
-        return role;
+    public int getBalance() {
+        return balance;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }  
-    
-    
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

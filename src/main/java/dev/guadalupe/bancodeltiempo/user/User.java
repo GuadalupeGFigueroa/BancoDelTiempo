@@ -36,23 +36,19 @@ public class User {
     @Pattern(regexp = "^\\+?\\d{10,15}$",message = "Invalid phone number format")
     private String phoneNumber;
 
-
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Account account;
+    @NotNull
+    private int balance;
 
     public User() {
     }
 
-    public User(String name, String lastname, String email, String password, String phoneNumber) {
+    public User(String name, String lastname, String email, String password, String phoneNumber, int balance) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-    }
-
-    public User(long l, String string, String string2, String string3, String string4) {
-        //TODO Auto-generated constructor stub
+        this.balance = balance;
     }
 
     public Long getId() {
@@ -103,12 +99,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Account getAccount() {
-        return account;
+    public int getBalance() {
+        return balance;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public void login() {
@@ -133,4 +129,3 @@ public class User {
         return Objects.hash(id);
     }
 }
-

@@ -13,7 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
+    
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -39,7 +39,7 @@ public class UserService {
                     existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
                     existingUser.setPassword(updatedUser.getPassword());
                     return userRepository.save(existingUser);
-                }).orElseThrow(() -> new IllegalArgumentException("User not found"));
+                }).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     public void deleteUser(Long id) {

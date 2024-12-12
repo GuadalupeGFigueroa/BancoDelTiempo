@@ -39,29 +39,6 @@ public class UserRepositoryTest {
         assertFalse(result.isPresent());
     }
 
-    @Test
-    public void testFindByUsername() {
-        // Arrange
-        User user = new User("john.doe@example.com", "johndoe");
-        when(userRepository.findByUsername("johndoe")).thenReturn(Optional.of(user));
+    
 
-        // Act
-        Optional<User> result = userRepository.findByUsername("johndoe");
-
-        // Assert
-        assertTrue(result.isPresent());
-        assertEquals(user, result.get());
-    }
-
-    @Test
-    public void testFindByUsernameNotFound() {
-        // Arrange
-        when(userRepository.findByUsername("nonexistent")).thenReturn(Optional.empty());
-
-        // Act
-        Optional<User> result = userRepository.findByUsername("nonexistent");
-
-        // Assert
-        assertFalse(result.isPresent());
-    }
 }

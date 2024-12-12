@@ -1,3 +1,5 @@
+package dev.guadalupe.bancodeltiempo.user;
+
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
@@ -64,7 +66,7 @@ public class UserTest {
     @Test
     public void testValidName() {
         User user = createValidUser();
-        user.setName("John Doe");
+        user.setName("John");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
 
         assertTrue(violations.isEmpty());
@@ -84,6 +86,36 @@ public class UserTest {
     public void testInvalidName_Null() {
         User user = createValidUser();
         user.setName(null);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertEquals(1, violations.size());
+        assertEquals("must not be null", violations.iterator().next().getMessage());
+    }
+
+    // --- Tests para el atributo lastname ---
+    @Test
+    public void testValidLastname() {
+        User user = createValidUser();
+        user.setLastname("Doe");
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    public void testInvalidLastname_TooShort() {
+        User user = createValidUser();
+        user.setLastname("D");
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        assertEquals(1, violations.size());
+        assertEquals("size must be between 2 and 50", violations.iterator().next().getMessage());
+    }
+
+    @Test
+    public void testInvalidLastname_Null() {
+        User user = createValidUser();
+        user.setLastname(null);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
 
         assertEquals(1, violations.size());
@@ -150,14 +182,15 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    @Test
-      // --- Método auxiliar para crear un usuario válido ---
+    // --- Método auxiliar para crear un usuario válido ---
     private User createValidUser() {
         User user = new User();
-        user.setName("John Doe");
+        user.setName("John");
+        user.setLastname("Doe");
         user.setEmail("example@example.com");
         user.setPassword("SecurePass123");
         user.setPhoneNumber("+12345678901");
+        user.setBalance(100);
         return user;
     }
 }

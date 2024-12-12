@@ -11,7 +11,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
+    
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -37,7 +37,7 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         try {
             return ResponseEntity.ok(userService.updateUser(id, updatedUser));
-        } catch (IllegalArgumentException e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
