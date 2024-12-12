@@ -1,11 +1,14 @@
 package dev.guadalupe.bancodeltiempo.user;
 
+import dev.guadalupe.bancodeltiempo.advertisement.Advertisement;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -128,4 +131,11 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+    
+    @OneToMany(mappedBy = "publicatedBy")
+    private List<Advertisement> publishedAdvertisements;
+
+    @OneToMany(mappedBy = "assignedTo")
+    private List<Advertisement> assignedAdvertisements;
+
 }
