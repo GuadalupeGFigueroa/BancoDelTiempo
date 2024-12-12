@@ -1,6 +1,5 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
 
-import dev.guadalupe.bancodeltiempo.advertisement.Advertisement;
 import dev.guadalupe.bancodeltiempo.user.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,22 +28,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testFindAll() {
         // given
-        User user = new User(
+        User user1= new User(
             1L, 
-            "Arancha",
-            "Doe", 
-            "john@example.com", 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
             "password123", 
             "1234567890", 
             60);
 
         User user2= new User(
             2L,  
-            "Anaís",
-            "Doe", 
-            "john@example.com", 
+            "User2",
+            "Coder2",
+            "coder2@example.com", 
             "password123", 
-            "1234567890", 
+            "1234567899",
             60);
 
         Advertisement advertisement1 = new Advertisement(
@@ -53,7 +51,7 @@ public class AdvertisementRepositoryTest {
             "description1", 
             LocalDate.of(2024,12,30), 
             LocalDate.of(2024,12,31),
-            user,
+            user1,
             AdvertisementState.PENDING
         );
 
@@ -62,7 +60,7 @@ public class AdvertisementRepositoryTest {
             "description2", 
             LocalDate.of(2024,12,30), 
             LocalDate.of(2024,12,31),
-            user,
+            user2,
             AdvertisementState.PENDING
         );
         advertisementRepository.save(advertisement1);
@@ -80,7 +78,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testFindById() {
         // given
-        Advertisement advertisement = new Advertisement("title", "description");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
         advertisementRepository.save(advertisement);
 
         // when
@@ -94,7 +107,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testSave() {
         // given
-        Advertisement advertisement = new Advertisement("title", "description");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
 
         // when
         Advertisement savedAdvertisement = advertisementRepository.save(advertisement);
@@ -107,7 +135,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testDeleteById() {
         // given
-        Advertisement advertisement = new Advertisement("title", "description");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
         advertisementRepository.save(advertisement);
 
         // when
@@ -120,7 +163,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testDelete() {
         // given
-        Advertisement advertisement = new Advertisement("title", "description");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
         advertisementRepository.save(advertisement);
 
         // when
@@ -133,8 +191,30 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testCount() {
         // given
-        Advertisement advertisement1 = new Advertisement("title1", "description1");
-        Advertisement advertisement2 = new Advertisement("title2", "description2");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement1 =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
+        Advertisement advertisement2 =  new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user1,
+            AdvertisementState.PENDING
+        );
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
@@ -148,7 +228,22 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testExistsById() {
         // given
-        Advertisement advertisement = new Advertisement("title", "description");
+        User user1= new User(
+            1L, 
+            "User1",
+            "Coder1",
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+        Advertisement advertisement =  new Advertisement(
+                "title1", 
+                "description1", 
+                LocalDate.of(2024,12,30), 
+                LocalDate.of(2024,12,31),
+                user1,
+                AdvertisementState.PENDING
+            );
         advertisementRepository.save(advertisement);
 
         // when
