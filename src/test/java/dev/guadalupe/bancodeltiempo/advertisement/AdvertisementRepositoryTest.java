@@ -1,6 +1,7 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
 
 import dev.guadalupe.bancodeltiempo.advertisement.Advertisement;
+import dev.guadalupe.bancodeltiempo.user.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,15 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AdvertisementRepositoryTest {
 
@@ -26,8 +30,41 @@ public class AdvertisementRepositoryTest {
     @Test
     public void testFindAll() {
         // given
-        Advertisement advertisement1 = new Advertisement("title1", "description1");
-        Advertisement advertisement2 = new Advertisement("title2", "description2");
+        User user = new User(
+            1L, 
+            "Arancha",
+            "Doe", 
+            "john@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+
+        User user2= new User(
+            2L,  
+            "Anaís",
+            "Doe", 
+            "john@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+
+        Advertisement advertisement1 = new Advertisement(
+            "title1", 
+            "description1", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user,
+            AdvertisementState.PENDING
+        );
+
+        Advertisement advertisement2 = new Advertisement(
+            "title2",
+            "description2", 
+            LocalDate.of(2024,12,30), 
+            LocalDate.of(2024,12,31),
+            user,
+            AdvertisementState.PENDING
+        );
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
@@ -121,4 +158,4 @@ public class AdvertisementRepositoryTest {
         assertTrue(exists);
     }
 }
-}
+

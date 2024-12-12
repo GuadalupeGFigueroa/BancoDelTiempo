@@ -12,7 +12,7 @@ public class AdvertisementTest {
    @Test
 public void testAssignTask() {
     // Create a new task and a user
-    Task task = new Task();
+
     User user = new User("John Doe");
 
     // Assign the task to the user

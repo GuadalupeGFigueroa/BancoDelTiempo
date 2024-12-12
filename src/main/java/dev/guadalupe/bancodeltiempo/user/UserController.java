@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -47,5 +48,13 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    public static class UserNotFoundException extends Exception {
+        public UserNotFoundException(String message) {
+            super(message);
+        }
+    }
 }
+
+
 

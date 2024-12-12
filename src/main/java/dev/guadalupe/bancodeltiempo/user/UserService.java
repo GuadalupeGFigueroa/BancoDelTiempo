@@ -1,19 +1,15 @@
 package dev.guadalupe.bancodeltiempo.user;
 
-import dev.guadalupe.bancodeltiempo.user.User;
-import dev.guadalupe.bancodeltiempo.user.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
 
-    
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -30,7 +26,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(Long id, User updatedUser) {
+    public User updateUser(Long id, User updatedUser) throws UserController.UserNotFoundException {
         return userRepository.findById(id)
                 .map(existingUser -> {
                     existingUser.setName(updatedUser.getName());
@@ -39,7 +35,7 @@ public class UserService {
                     existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
                     existingUser.setPassword(updatedUser.getPassword());
                     return userRepository.save(existingUser);
-                }).orElseThrow(() -> new UserNotFoundException("User not found"));
+                }).orElseThrow(() -> new UserController.UserNotFoundException("User not found"));
     }
 
     public void deleteUser(Long id) {
