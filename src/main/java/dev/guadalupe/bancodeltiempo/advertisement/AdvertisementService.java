@@ -1,4 +1,5 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
+import dev.guadalupe.bancodeltiempo.advertisement.AdvertisementRepository;
 
 import dev.guadalupe.bancodeltiempo.user.User;
 import dev.guadalupe.bancodeltiempo.user.UserRepository;
@@ -13,7 +14,7 @@ public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
     private final UserRepository userRepository;
 
-    @Autowired
+   
     public AdvertisementService(AdvertisementRepository advertisementRepository, UserRepository userRepository) {
         this.advertisementRepository = advertisementRepository;
         this.userRepository = userRepository;
