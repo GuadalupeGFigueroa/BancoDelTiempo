@@ -3,6 +3,7 @@ package dev.guadalupe.bancodeltiempo.advertisement;
 import dev.guadalupe.bancodeltiempo.user.User;
 import dev.guadalupe.bancodeltiempo.user.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,6 @@ public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
     private final UserRepository userRepository;
 
-   
     public AdvertisementService(AdvertisementRepository advertisementRepository, UserRepository userRepository) {
         this.advertisementRepository = advertisementRepository;
         this.userRepository = userRepository;
@@ -33,10 +33,12 @@ public class AdvertisementService {
     public Advertisement updateAdvertisement(Long id, Advertisement updatedAdvertisement) {
         return advertisementRepository.findById(id)
                 .map(existingAdvertisement -> {
+                    existingAdvertisement.setTitle(updatedAdvertisement.getTitle());
                     existingAdvertisement.setDescription(updatedAdvertisement.getDescription());
                     existingAdvertisement.setPublicationDate(updatedAdvertisement.getPublicationDate());
                     existingAdvertisement.setTaskDate(updatedAdvertisement.getTaskDate());
                     existingAdvertisement.setState(updatedAdvertisement.getState());
+                    existingAdvertisement.setPayment(updatedAdvertisement.getPayment());
                     return advertisementRepository.save(existingAdvertisement);
                 }).orElseThrow(() -> new IllegalArgumentException("Advertisement not found"));
     }
