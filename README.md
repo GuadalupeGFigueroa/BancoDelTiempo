@@ -1,9 +1,13 @@
 ﻿# BancoDelTiempo
 Banco del Tiempo - MVP
 
+Contexto
+Una pequeña asociación lleva a cabo en su barrio una iniciativa vecinal que gestiona un banco del tiempo. Quieren una aplicación con la cual los encargados del proyecto puedan gestionar ese banco del tiempo.
+Objetivo.
+
 Descripción
 
-Banco del Tiempo es una aplicación desarrollada en Java con Spring Boot que permite a los usuarios gestionar su tiempo como una moneda de intercambio. La versión MVP (Producto Mínimo Viable) incluye las funcionalidades básicas de registro de usuarios, publicación y asignación de tareas, así como la gestión de una cuenta bancaria de tiempo.
+Banco del Tiempo es una aplicación desarrollada en Java con Spring Boot que permite a los usuarios gestionar su tiempo como una moneda de intercambio. La versión MVP (Producto Mínimo Viable) incluye las funcionalidades básicas de registro de usuarios, publicación y asignación de tareas, así como la gestión de una cuenta bancaria de tiempo, empleando unas monedas llamadas "Kairós".
 
 Historias de Usuario
 
