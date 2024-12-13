@@ -46,6 +46,7 @@ public class AdvertisementRepositoryTest {
             60);
 
         Advertisement advertisement1 = new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -55,6 +56,7 @@ public class AdvertisementRepositoryTest {
         );
 
         Advertisement advertisement2 = new Advertisement(
+            2L,
             "title2",
             "description2", 
             LocalDate.of(2024,12,30), 
@@ -86,6 +88,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement =  new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -115,6 +118,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement =  new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -143,6 +147,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement =  new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -171,6 +176,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement =  new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -199,6 +205,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement1 =  new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -207,6 +214,7 @@ public class AdvertisementRepositoryTest {
             AdvertisementState.PENDING
         );
         Advertisement advertisement2 =  new Advertisement(
+            1L, 
             "title1", 
             "description1", 
             LocalDate.of(2024,12,30), 
@@ -236,6 +244,7 @@ public class AdvertisementRepositoryTest {
             "1234567890", 
             60);
         Advertisement advertisement =  new Advertisement(
+                1L,
                 "title1", 
                 "description1", 
                 LocalDate.of(2024,12,30), 

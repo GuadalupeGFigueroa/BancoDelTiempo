@@ -19,6 +19,7 @@ public void testAssignTask() {
         "1234567890", 
         60);
     Advertisement advertisement = new Advertisement(
+        1L,
         "title1", 
         "description1", 
         LocalDate.of(2024,12,30), 
@@ -41,6 +42,7 @@ public void testChangeState() {
         "1234567890", 
         60); 
     Advertisement advertisement = new Advertisement(
+        1L,
         "title1", 
         "description1", 
         LocalDate.of(2024, 12, 30), 
@@ -65,6 +67,7 @@ public void testChangeState() {
         
         // Create an advertisement using the constructor with parameters 
         Advertisement advertisement = new Advertisement(
+            1L,
             "title1", 
             "description1", 
             LocalDate.of(2024, 12, 30), 

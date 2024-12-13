@@ -1,6 +1,7 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
 
 import dev.guadalupe.bancodeltiempo.advertisement.AdvertisementState;
+import dev.guadalupe.bancodeltiempo.user.User;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,9 +47,45 @@ public class AdvertisementControllerTest {
     @Test
     public void testGetAllAdvertisements() throws Exception {
         // given
-        Advertisement advertisement1 = new Advertisement(1L, "Sample Ad1", LocalDate.now(), LocalDate.now().plusDays(7), null, 120, AdvertisementState.PENDING);
-        Advertisement advertisement2 = new Advertisement(2L, "Sample Ad2", LocalDate.now(), LocalDate.now().plusDays(7), null, 120, AdvertisementState.PENDING);
-    
+        User user1 = new User(
+        1L, "User1", 
+        "Coder1", 
+        "user1@example.com", 
+        "password123", 
+        "1234567890", 
+        180); 
+
+        User user2 = new User(
+        1L, "User2", 
+        "Coder2", 
+        "user1@example.com", 
+        "password123", 
+        "1234567890", 
+        40); 
+
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
+            user1,
+            90,
+            AdvertisementState.PENDING);
+
+        Advertisement advertisement2 = new Advertisement(
+            2L, 
+            "Fix a car", 
+            "Please, someone could help me to change the oil in my car?",
+            LocalDate.of(2024, 12, 4), 
+            LocalDate.of(2024, 12, 21),
+            user2,
+            60,
+            AdvertisementState.PENDING
+        );
+
+       
+        
         List<Advertisement> advertisements = Arrays.asList(advertisement1, advertisement2);
 
         when(advertisementService.getAllAdvertisements()).thenReturn(advertisements);

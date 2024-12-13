@@ -29,6 +29,9 @@ public class Advertisement {
     @JoinColumn(name = "publicated_by_id")
     private User publicatedBy;
 
+    @NotNull
+    private int payment;
+
     @ManyToOne
     @JoinColumn(name = "assigned_to_id")
     private User assignedTo;
@@ -38,13 +41,14 @@ public class Advertisement {
 
     public Advertisement() {}
 
-    public Advertisement(Long id,String title, String description, LocalDate publicationDate, LocalDate taskDate, User publicatedBy, AdvertisementState state) {
+    public Advertisement(Long id, String title, String description, LocalDate publicationDate, LocalDate taskDate, User publicatedBy, int payment, AdvertisementState state) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.publicationDate = publicationDate;
         this.taskDate = taskDate;
         this.publicatedBy = publicatedBy;
+        this.payment = payment;
         this.state = state;
     }
 
@@ -106,6 +110,15 @@ public class Advertisement {
     public void setPublicatedBy(User publicatedBy) {
         this.publicatedBy = publicatedBy;
     }
+
+    public int getPayment() {
+        return payment;
+    }    
+
+    public void setPayment(int payment) {
+        this.payment = payment;
+    }
+
 
     public User getAssignedTo() {
         return assignedTo;
