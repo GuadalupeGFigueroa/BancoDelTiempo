@@ -24,7 +24,7 @@ class UserControllerTest {
 
     @Test
     void getAllUsers_ReturnsUserList() throws Exception {
-        // Mockear datos
+     
         User user1 = new User(
             1L, "User1", 
             "coder1", 
@@ -43,7 +43,6 @@ class UserControllerTest {
 
         when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        // Ejecutar la prueba
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))

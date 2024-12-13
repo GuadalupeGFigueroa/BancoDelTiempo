@@ -26,7 +26,7 @@ public class AdvertisementRepositoryTest {
 
     @Test
     public void testFindAll() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -69,10 +69,10 @@ public class AdvertisementRepositoryTest {
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
-        // when
+        
         List<Advertisement> advertisements = advertisementRepository.findAll();
 
-        // then
+        
         assertEquals(2, advertisements.size());
         assertTrue(advertisements.contains(advertisement1));
         assertTrue(advertisements.contains(advertisement2));
@@ -80,7 +80,7 @@ public class AdvertisementRepositoryTest {
 
     @Test
     public void testFindById() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -100,17 +100,17 @@ public class AdvertisementRepositoryTest {
             AdvertisementState.PENDING);
         advertisementRepository.save(advertisement1);
 
-        // when
+       
         Advertisement foundAdvertisement = advertisementRepository.findById(advertisement1.getId()).orElse(null);
 
-        // then
+       
         assertNotNull(foundAdvertisement);
         assertEquals(advertisement1, foundAdvertisement);
     }
 
     @Test
     public void testSave() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -130,17 +130,17 @@ public class AdvertisementRepositoryTest {
             90,
             AdvertisementState.PENDING);
 
-        // when
+       
         Advertisement savedAdvertisement = advertisementRepository.save(advertisement1);
 
-        // then
+        
         assertNotNull(savedAdvertisement);
         assertEquals(advertisement1, savedAdvertisement);
     }
 
     @Test
     public void testDeleteById() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -160,16 +160,16 @@ public class AdvertisementRepositoryTest {
             AdvertisementState.PENDING);
         advertisementRepository.save(advertisement1);
 
-        // when
+      
         advertisementRepository.deleteById(advertisement1.getId());
 
-        // then
+      
         assertFalse(advertisementRepository.existsById(advertisement1.getId()));
     }
 
     @Test
     public void testDelete() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -190,16 +190,16 @@ public class AdvertisementRepositoryTest {
             AdvertisementState.PENDING);
         advertisementRepository.save(advertisement1);
 
-        // when
+        
         advertisementRepository.delete(advertisement1);
 
-        // then
+        
         assertFalse(advertisementRepository.existsById(advertisement1.getId()));
     }
 
     @Test
     public void testCount() {
-        // given
+        
         User user1 = new User(
             1L, "User1", 
             "Coder1", 
@@ -240,16 +240,16 @@ public class AdvertisementRepositoryTest {
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
-        // when
+       
         long count = advertisementRepository.count();
 
-        // then
+        
         assertEquals(2, count);
     }
 
     @Test
     public void testExistsById() {
-        // given
+        
         User user1= new User(
             1L, 
             "User1",
@@ -270,10 +270,10 @@ public class AdvertisementRepositoryTest {
             AdvertisementState.PENDING);
         advertisementRepository.save(advertisement1);
 
-        // when
+       
         boolean exists = advertisementRepository.existsById(advertisement1.getId());
 
-        // then
+        
         assertTrue(exists);
     }
 }

@@ -22,7 +22,7 @@ public class UserTest {
         validator = factory.getValidator();
     }
 
-    // --- Tests para el atributo email ---
+    
     @Test
     public void testValidEmail() {
         User user = createValidUser();
@@ -62,7 +62,7 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Tests para el atributo name ---
+  
     @Test
     public void testValidName() {
         User user = createValidUser();
@@ -92,7 +92,6 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Tests para el atributo lastname ---
     @Test
     public void testValidLastname() {
         User user = createValidUser();
@@ -122,7 +121,7 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Tests para el atributo password ---
+    
     @Test
     public void testValidPassword() {
         User user = createValidUser();
@@ -152,7 +151,7 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Tests para el atributo phoneNumber ---
+    
     @Test
     public void testValidPhoneNumber() {
         User user = createValidUser();
@@ -182,7 +181,7 @@ public class UserTest {
         assertEquals("must not be null", violations.iterator().next().getMessage());
     }
 
-    // --- Método auxiliar para crear un usuario válido ---
+   
     private User createValidUser() {
         User user = new User();
         user.setName("John");

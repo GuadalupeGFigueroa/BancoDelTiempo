@@ -12,7 +12,7 @@ public class AdvertisementDtoTest {
 
     @Test
     public void testAdvertisementDtoConstructor() {
-        // Datos simulados
+        
         Long advertisementId = 1L;
         String title = "Test Title";
         String description = "Test Description";
@@ -41,10 +41,10 @@ public class AdvertisementDtoTest {
         );
         advertisement.setAssignedTo(assignedTo);
 
-        // Construcción del DTO
+        
         AdvertisementDto advertisementDto = new AdvertisementDto(advertisement);
 
-        // Verificaciones
+        
         assertEquals(advertisementId, advertisementDto.getId());
         assertEquals(title, advertisementDto.getTitle());
         assertEquals(description, advertisementDto.getDescription());
@@ -58,7 +58,7 @@ public class AdvertisementDtoTest {
 
     @Test
     public void testAdvertisementDtoConstructorWithNullAssignedTo() {
-        // Datos simulados con assignedTo como null
+        
         Long advertisementId = 1L;
         String title = "Test Title";
         String description = "Test Description";
@@ -82,17 +82,17 @@ public class AdvertisementDtoTest {
             state
         );
 
-        // Construcción del DTO
+       
         AdvertisementDto advertisementDto = new AdvertisementDto(advertisement);
 
-        // Verificaciones
+        
         assertEquals(advertisementId, advertisementDto.getId());
         assertEquals(title, advertisementDto.getTitle());
         assertEquals(description, advertisementDto.getDescription());
         assertEquals(publicationDate, advertisementDto.getPublicationDate());
         assertEquals(taskDate, advertisementDto.getTaskDate());
         assertEquals(publicatedById, advertisementDto.getPublicatedById());
-        assertNull(advertisementDto.getAssignedToId()); // Debe ser
+        assertNull(advertisementDto.getAssignedToId()); 
 
     }
 

@@ -6,7 +6,7 @@ import dev.guadalupe.bancodeltiempo.user.User;
 public class UserDto {
     private Long id;
     private String name;
-    private String lastname;  // Incluyendo apellido para consistencia
+    private String lastname;  
     private String email;
     private String phoneNumber;
     private int balance;
@@ -14,7 +14,7 @@ public class UserDto {
     public UserDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
-        this.lastname = user.getLastname();  // Incluyendo apellido
+        this.lastname = user.getLastname();  
         this.email = user.getEmail();
         this.phoneNumber = user.getPhoneNumber();
         this.balance = user.getBalance();

@@ -52,8 +52,7 @@ public class Advertisement {
         this.state = state;
     }
 
-    // Getters and setters...
-    
+   
 
     public void changeState(AdvertisementState newState) {
         this.state = newState;

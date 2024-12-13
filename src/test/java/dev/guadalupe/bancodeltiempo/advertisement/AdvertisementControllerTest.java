@@ -44,7 +44,7 @@ public class AdvertisementControllerTest {
 
     @Test
     public void testGetAllAdvertisements() throws Exception {
-        // given
+        
         User user1 = new User(
         1L, "User1", 
         "Coder1", 
@@ -88,7 +88,7 @@ public class AdvertisementControllerTest {
 
         when(advertisementService.getAllAdvertisements()).thenReturn(advertisements);
 
-        // when & then
+  
         mockMvc.perform(get(BASE_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -100,7 +100,7 @@ public class AdvertisementControllerTest {
 
     @Test
     public void testGetAdvertisementById() throws Exception {
-        // given
+      
 
         Long id = 1L;
     User user1 = new User(
@@ -124,7 +124,6 @@ public class AdvertisementControllerTest {
     
         when(advertisementService.getAdvertisementById(id)).thenReturn(Optional.of(advertisement1));
 
-        // when & then
         mockMvc.perform(get(BASE_URL + "/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -134,18 +133,18 @@ public class AdvertisementControllerTest {
 
     @Test
     public void testGetAdvertisementByIdNotFound() throws Exception {
-        // given
+      
         Long id = 1L;
         when(advertisementService.getAdvertisementById(id)).thenReturn(Optional.empty());
 
-        // when & then
+       
         mockMvc.perform(get(BASE_URL + "/{id}", id))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testCreateAdvertisement() throws Exception {
-        // given
+       
         User user3 = new User(
             3L, "User3", 
             "Coder3", 
@@ -177,7 +176,7 @@ public class AdvertisementControllerTest {
         );
         when(advertisementService.createAdvertisement(advertisement3)).thenReturn(savedAdvertisement);
 
-        // when & then
+     
         mockMvc.perform(post(BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(advertisement3)))
@@ -189,10 +188,10 @@ public class AdvertisementControllerTest {
 
     @Test
     public void testDeleteAdvertisement() throws Exception {
-        // given
+        
         Long id = 1L;
 
-        // when & then
+        
         mockMvc.perform(delete(BASE_URL + "/{id}", id))
                 .andExpect(status().isNoContent());
     }
