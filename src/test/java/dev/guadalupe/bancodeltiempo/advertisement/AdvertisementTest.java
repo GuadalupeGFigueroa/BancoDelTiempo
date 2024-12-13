@@ -10,7 +10,14 @@ public class AdvertisementTest {
    @Test
 public void testAssignTask() {
     // Create a new task and a user
-    User user = new User("User1", "Coder1", "user1@example.com", "password123", "1234567890", 60);
+    User user = new User(
+        1L, 
+        "User1",
+        "Coder1",
+        "user1@example.com", 
+        "password123", 
+        "1234567890", 
+        60);
     Advertisement advertisement = new Advertisement(
         "title1", 
         "description1", 

@@ -28,7 +28,9 @@ public class User {
 
     @NotNull
     @Email
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",message = "Invalid email format")
+    @Pattern(
+        regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",
+        message = "Invalid email format")
     private String email;    
     
     @NotNull
@@ -36,7 +38,9 @@ public class User {
     private String password;
 
     @NotNull
-    @Pattern(regexp = "^\\+?\\d{10,15}$",message = "Invalid phone number format")
+    @Pattern(
+        regexp = "^\\+?\\d{10,15}$",
+        message = "Invalid phone number format")
     private String phoneNumber;
 
     @NotNull
