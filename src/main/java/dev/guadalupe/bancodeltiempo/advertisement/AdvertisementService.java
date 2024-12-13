@@ -1,9 +1,7 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
-import dev.guadalupe.bancodeltiempo.advertisement.AdvertisementRepository;
 
 import dev.guadalupe.bancodeltiempo.user.User;
 import dev.guadalupe.bancodeltiempo.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

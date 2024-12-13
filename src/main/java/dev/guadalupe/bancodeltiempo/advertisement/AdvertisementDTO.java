@@ -1,11 +1,6 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
-import dev.guadalupe.bancodeltiempo.advertisement.Advertisement;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import dev.guadalupe.bancodeltiempo.user.User;  
-
 
 public class AdvertisementDto {
     private Long id;

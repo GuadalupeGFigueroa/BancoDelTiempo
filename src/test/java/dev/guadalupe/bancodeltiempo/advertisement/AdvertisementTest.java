@@ -13,7 +13,7 @@ public class AdvertisementTest {
 public void testAssignTask() {
     // Create a new task and a user
 
-    User user = new User("John Doe");
+    User user = new User("User1", "Coder1", "user1@example.com", "password123", "1234567890", 60);
 
     // Assign the task to the user
     task.assignTask(user);
