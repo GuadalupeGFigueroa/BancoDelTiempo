@@ -25,8 +25,21 @@ class UserControllerTest {
     @Test
     void getAllUsers_ReturnsUserList() throws Exception {
         // Mockear datos
-        User user1 = new User("John", "Doe", "john@example.com", "password123", "+1234567890", 100);
-        User user2 = new User("Jane", "Doe", "jane@example.com", "password456", "+9876543210", 200);
+        User user1 = new User(
+            1L, "User1", 
+            "coder1", 
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            60);
+
+        User user2 = new User(
+            2L, "User2", 
+            "coder2", 
+            "coder2@example.com", 
+            "password123", 
+            "1234567890", 
+            120);
 
         when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 
@@ -34,8 +47,8 @@ class UserControllerTest {
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))
-                .andExpect(jsonPath("$[0].name").value("John"))
-                .andExpect(jsonPath("$[1].name").value("Jane"));
+                .andExpect(jsonPath("$[0].name").value("User1"))
+                .andExpect(jsonPath("$[1].name").value("User2"));
 
         verify(userService, times(1)).getAllUsers();
     }
