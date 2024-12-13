@@ -46,24 +46,26 @@ public class AdvertisementRepositoryTest {
             60);
 
         Advertisement advertisement1 = new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
-            AdvertisementState.PENDING
-        );
+            90,
+            AdvertisementState.PENDING);
 
         Advertisement advertisement2 = new Advertisement(
-            2L,
-            "title2",
-            "description2", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+            2L, 
+            "Fix a car", 
+            "Please, someone could help me to change the oil in my car?",
+            LocalDate.of(2024, 12, 4), 
+            LocalDate.of(2024, 12, 21),
             user2,
+            60,
             AdvertisementState.PENDING
         );
+    
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
@@ -87,23 +89,23 @@ public class AdvertisementRepositoryTest {
             "password123", 
             "1234567890", 
             60);
-        Advertisement advertisement =  new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
-            AdvertisementState.PENDING
-        );
-        advertisementRepository.save(advertisement);
+            90,
+            AdvertisementState.PENDING);
+        advertisementRepository.save(advertisement1);
 
         // when
-        Advertisement foundAdvertisement = advertisementRepository.findById(advertisement.getId()).orElse(null);
+        Advertisement foundAdvertisement = advertisementRepository.findById(advertisement1.getId()).orElse(null);
 
         // then
         assertNotNull(foundAdvertisement);
-        assertEquals(advertisement, foundAdvertisement);
+        assertEquals(advertisement1, foundAdvertisement);
     }
 
     @Test
@@ -117,22 +119,23 @@ public class AdvertisementRepositoryTest {
             "password123", 
             "1234567890", 
             60);
-        Advertisement advertisement =  new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
-            AdvertisementState.PENDING
-        );
+            90,
+            AdvertisementState.PENDING);
 
         // when
-        Advertisement savedAdvertisement = advertisementRepository.save(advertisement);
+        Advertisement savedAdvertisement = advertisementRepository.save(advertisement1);
 
         // then
         assertNotNull(savedAdvertisement);
-        assertEquals(advertisement, savedAdvertisement);
+        assertEquals(advertisement1, savedAdvertisement);
     }
 
     @Test
@@ -146,22 +149,22 @@ public class AdvertisementRepositoryTest {
             "password123", 
             "1234567890", 
             60);
-        Advertisement advertisement =  new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
-            AdvertisementState.PENDING
-        );
-        advertisementRepository.save(advertisement);
+            90,
+            AdvertisementState.PENDING);
+        advertisementRepository.save(advertisement1);
 
         // when
-        advertisementRepository.deleteById(advertisement.getId());
+        advertisementRepository.deleteById(advertisement1.getId());
 
         // then
-        assertFalse(advertisementRepository.existsById(advertisement.getId()));
+        assertFalse(advertisementRepository.existsById(advertisement1.getId()));
     }
 
     @Test
@@ -175,53 +178,65 @@ public class AdvertisementRepositoryTest {
             "password123", 
             "1234567890", 
             60);
-        Advertisement advertisement =  new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
-            AdvertisementState.PENDING
-        );
-        advertisementRepository.save(advertisement);
+            90,
+            AdvertisementState.PENDING);
+        advertisementRepository.save(advertisement1);
 
         // when
-        advertisementRepository.delete(advertisement);
+        advertisementRepository.delete(advertisement1);
 
         // then
-        assertFalse(advertisementRepository.existsById(advertisement.getId()));
+        assertFalse(advertisementRepository.existsById(advertisement1.getId()));
     }
 
     @Test
     public void testCount() {
         // given
-        User user1= new User(
-            1L, 
-            "User1",
-            "Coder1",
+        User user1 = new User(
+            1L, "User1", 
+            "Coder1", 
             "user1@example.com", 
             "password123", 
             "1234567890", 
-            60);
-        Advertisement advertisement1 =  new Advertisement(
-            1L,
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
-            user1,
-            AdvertisementState.PENDING
-        );
-        Advertisement advertisement2 =  new Advertisement(
+            180); 
+    
+        User user2 = new User(
+            1L, "User2", 
+            "Coder2", 
+            "user1@example.com", 
+            "password123", 
+            "1234567890", 
+            40); 
+    
+        Advertisement advertisement1 = new Advertisement(
             1L, 
-            "title1", 
-            "description1", 
-            LocalDate.of(2024,12,30), 
-            LocalDate.of(2024,12,31),
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
             user1,
+            90,
+            AdvertisementState.PENDING);
+
+        Advertisement advertisement2 = new Advertisement(
+            2L, 
+            "Fix a car", 
+            "Please, someone could help me to change the oil in my car?",
+            LocalDate.of(2024, 12, 4), 
+            LocalDate.of(2024, 12, 21),
+            user2,
+            60,
             AdvertisementState.PENDING
         );
+    
         advertisementRepository.save(advertisement1);
         advertisementRepository.save(advertisement2);
 
@@ -243,19 +258,20 @@ public class AdvertisementRepositoryTest {
             "password123", 
             "1234567890", 
             60);
-        Advertisement advertisement =  new Advertisement(
-                1L,
-                "title1", 
-                "description1", 
-                LocalDate.of(2024,12,30), 
-                LocalDate.of(2024,12,31),
-                user1,
-                AdvertisementState.PENDING
-            );
-        advertisementRepository.save(advertisement);
+
+        Advertisement advertisement1 = new Advertisement(
+            1L, 
+            "House move", 
+            "Please, I need help loading some boxes into my van.",
+            LocalDate.of(2024, 12, 10), 
+            LocalDate.of(2025, 1, 10), 
+            user1,
+            90,
+            AdvertisementState.PENDING);
+        advertisementRepository.save(advertisement1);
 
         // when
-        boolean exists = advertisementRepository.existsById(advertisement.getId());
+        boolean exists = advertisementRepository.existsById(advertisement1.getId());
 
         // then
         assertTrue(exists);

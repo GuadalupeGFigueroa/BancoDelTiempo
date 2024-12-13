@@ -1,6 +1,5 @@
 package dev.guadalupe.bancodeltiempo.advertisement;
 
-import dev.guadalupe.bancodeltiempo.advertisement.AdvertisementState;
 import dev.guadalupe.bancodeltiempo.user.User;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.lang.Thread.State;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -103,16 +101,35 @@ public class AdvertisementControllerTest {
     @Test
     public void testGetAdvertisementById() throws Exception {
         // given
+
         Long id = 1L;
-        Advertisement advertisement = new Advertisement(id, "Sample Ad", LocalDate.now(), LocalDate.now().plusDays(7), null, 120, State.PENDING);
-        when(advertisementService.getAdvertisementById(id)).thenReturn(Optional.of(advertisement));
+    User user1 = new User(
+        1L, "User1", 
+        "Coder1", 
+        "user1@example.com", 
+        "password123", 
+        "1234567890", 
+        180); 
+
+    Advertisement advertisement1 = new Advertisement(
+        1L, 
+        "House move", 
+        "Please, I need help loading some boxes into my van.",
+        LocalDate.of(2024, 12, 10), 
+        LocalDate.of(2025, 1, 10), 
+        user1,
+        90,
+        AdvertisementState.PENDING);
+
+    
+        when(advertisementService.getAdvertisementById(id)).thenReturn(Optional.of(advertisement1));
 
         // when & then
         mockMvc.perform(get(BASE_URL + "/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.description").value("Sample Ad"));
+                .andExpect(jsonPath("$.description").value("House move"));
     }
 
     @Test
@@ -129,14 +146,41 @@ public class AdvertisementControllerTest {
     @Test
     public void testCreateAdvertisement() throws Exception {
         // given
-        Advertisement advertisement = new Advertisement(null, "New Ad", LocalDate.now(), LocalDate.now().plusDays(10), null, 80, State.PENDING);
-        Advertisement savedAdvertisement = new Advertisement(1L, "New Ad", LocalDate.now(), LocalDate.now().plusDays(10), null, 80, State.PENDING);
-        when(advertisementService.createAdvertisement(advertisement)).thenReturn(savedAdvertisement);
+        User user3 = new User(
+            3L, "User3", 
+            "Coder3", 
+            "user3@example.com", 
+            "password123", 
+            "1234567890", 
+            180
+            ); 
+            
+        Advertisement advertisement3 = new Advertisement(
+            3L, 
+            "Work tools", 
+            "I need to learn how to use a drill and a saw. Please, someone could help me?",
+            LocalDate.of(2024, 12, 4), 
+            LocalDate.of(2024, 12, 21),
+            user3,
+            30,
+            AdvertisementState.PENDING
+        );
+        Advertisement savedAdvertisement = new Advertisement(
+            3L, 
+            "Work tools", 
+            "I need to learn how to use a drill and a saw. Please, someone could help me?",
+            LocalDate.of(2024, 12, 4), 
+            LocalDate.of(2024, 12, 21),
+            user3,
+            30,
+            AdvertisementState.PENDING
+        );
+        when(advertisementService.createAdvertisement(advertisement3)).thenReturn(savedAdvertisement);
 
         // when & then
         mockMvc.perform(post(BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(advertisement)))
+                .content(objectMapper.writeValueAsString(advertisement3)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1))
