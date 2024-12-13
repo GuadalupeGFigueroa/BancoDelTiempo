@@ -55,6 +55,15 @@ public class User {
         this.balance = balance;
     }
 
+    public User(String name, String lastname, String email, String password, String phoneNumber, int balance) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
+    }
+    
 
     public Long getId() {
         return id;
