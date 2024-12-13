@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +47,7 @@ class UserServiceTest {
         when(userRepository.findAll()).thenReturn(Arrays.asList(user1, user2));
 
         // Ejecutar el método del servicio
-        var users = userService.listUsers();
+        List<User> users = userService.getAllUsers();
 
         // Verificar resultados
         assertEquals(2, users.size());
