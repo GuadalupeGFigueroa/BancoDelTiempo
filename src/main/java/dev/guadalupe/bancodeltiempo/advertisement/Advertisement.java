@@ -38,7 +38,8 @@ public class Advertisement {
 
     public Advertisement() {}
 
-    public Advertisement(String title, String description, LocalDate publicationDate, LocalDate taskDate, User publicatedBy, AdvertisementState state) {
+    public Advertisement(Long id,String title, String description, LocalDate publicationDate, LocalDate taskDate, User publicatedBy, AdvertisementState state) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.publicationDate = publicationDate;
